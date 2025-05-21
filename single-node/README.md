@@ -26,9 +26,21 @@ The environment takes about 1 minute to get up (depending on your Docker host) f
 The agent is not installed on ubuntu monitored-host. (The work is in progress to be automated)
 
 Here are the current steps that you need to implement to install the agent:
+```
 docker exec -it monitored-host bash
+```
+```
 curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+```
+```
 apt update && apt install gpg crl
+```
+```
 echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+```
+```
 WAZUH_MANAGER="wazuh.manager" apt-get install wazuh-agent
+```
+```
 /var/ossec/bin/wazuh-control start
+```
